@@ -43,7 +43,7 @@ public class DemoCRUDOperations {
         Class.forName("org.postgresql.Driver");
 
         // 2. define connection params to db
-        final String URL = "jdbc:postgresql://IP:5432/fast1";
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/4_Ovidiu";
         final String USERNAME = "fasttrackit_dev";
         final String PASSWORD = "fasttrackit_dev";
 
@@ -51,9 +51,9 @@ public class DemoCRUDOperations {
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("INSERT INTO USERS (NAME, PASSWORD) VALUES (?,?)");
-        pSt.setString(1, "ionel");
-        pSt.setString(2, "password1");
+        PreparedStatement pSt = conn.prepareStatement("INSERT INTO users (name, password) VALUES (?,?)");
+        pSt.setString(1, "Admin");
+        pSt.setString(2, "parola");
 
         // 5. execute a prepared statement
         int rowsInserted = pSt.executeUpdate();
@@ -68,7 +68,7 @@ public class DemoCRUDOperations {
         Class.forName("org.postgresql.Driver");
 
         // 2. define connection params to db
-        final String URL = "jdbc:postgresql://IP:5432/fast1";
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/4_Ovidiu";
         final String USERNAME = "fasttrackit_dev";
         final String PASSWORD = "fasttrackit_dev";
 
@@ -79,7 +79,11 @@ public class DemoCRUDOperations {
         Statement st = conn.createStatement();
 
         // 5. execute a query
-        ResultSet rs = st.executeQuery("SELECT name,password FROM users");
+        String value = "parola";
+        String q = "SELECT name,password FROM users where password like '%"+ value +"%'";
+        System.out.println(q);
+
+        ResultSet rs = st.executeQuery(q);
 
         // 6. iterate the result set and print the values
         while (rs.next()) {
@@ -100,7 +104,7 @@ public class DemoCRUDOperations {
         Class.forName("org.postgresql.Driver");
 
         // 2. define connection params to db
-        final String URL = "jdbc:postgresql://IP:5432/fast1";
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/4_Ovidiu";
         final String USERNAME = "fasttrackit_dev";
         final String PASSWORD = "fasttrackit_dev";
 
@@ -108,8 +112,8 @@ public class DemoCRUDOperations {
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("UPDATE USERS SET NAME=?, PASSWORD=? WHERE PK_USER=?"); //so we have 3 params
-        pSt.setString(1, "ionelcondor");
+        PreparedStatement pSt = conn.prepareStatement("UPDATE USERS SET NAME=?, PASSWORD=? WHERE id=?"); //so we have 3 params
+        pSt.setString(1, "bufy94");
         pSt.setString(2, "password1");
         pSt.setLong(3, 1);
 
@@ -128,7 +132,7 @@ public class DemoCRUDOperations {
         Class.forName("org.postgresql.Driver");
 
         // 2. define connection params to db
-        final String URL = "jdbc:postgresql://IP:5432/fast1";
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/4_Ovidiu";
         final String USERNAME = "fasttrackit_dev";
         final String PASSWORD = "fasttrackit_dev";
 
@@ -136,7 +140,7 @@ public class DemoCRUDOperations {
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("DELETE FROM USERS WHERE PK_USER=?");
+        PreparedStatement pSt = conn.prepareStatement("DELETE FROM USERS WHERE id=?");
         pSt.setLong(1, 1);
 
         // 5. execute a prepared statement
